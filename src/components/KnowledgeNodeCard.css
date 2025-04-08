@@ -1,0 +1,129 @@
+.knowledge-node-card {
+  background-color: var(--card-bg, #ffffff);
+  border-radius: 12px; /* Slightly more rounded */
+  border: 1px solid var(--card-border, #e5e7eb);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05); /* Refined shadow */
+  overflow: hidden;
+  display: flex; /* Use flex for better structure */
+  flex-direction: column;
+}
+
+.node-card-title {
+  font-size: 1.4rem; /* Larger title */
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  margin: 0;
+  padding: 22px 32px; /* Slightly increased padding */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #f9fafb; /* Light background for title */
+}
+
+/* Container for sections with padding */
+.node-card-sections {
+  padding: 12px 32px 22px 32px; /* Slightly increased padding */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between collapsible sections */
+}
+
+/* Style collapsible sections within the card */
+.node-card-sections .collapsible-section {
+  border: 1px solid var(--card-border, #e5e7eb); /* Border around each section */
+  border-radius: 8px; /* Rounded corners for sections */
+  overflow: hidden; /* Ensure content stays within rounded border */
+  background-color: #ffffff; /* White background for sections */
+}
+
+/* Image Styling */
+.content-image-wrapper {
+  margin: 10px 0 20px 0; /* Adjusted margin */
+  text-align: center;
+}
+.content-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background-color: #f0f0f0; /* Placeholder bg */
+  border: 1px solid #e5e7eb; /* Light border for image */
+  display: block; /* Prevent extra space below image */
+  margin: 0 auto; /* Center block image */
+}
+
+.node-card-footer {
+  padding: 18px 32px; /* Match horizontal padding, slightly increased vertical */
+  background-color: #f9fafb; /* Match title background */
+  border-top: 1px solid var(--card-border, #e5e7eb);
+}
+
+/* --- Inline Help Form Styles --- */
+.inline-help-form-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+  background-color: #f0f4f8; /* Slightly different background */
+  padding: 0 30px; /* Horizontal padding matches footer */
+}
+
+.inline-help-form-container.open {
+  max-height: 300px; /* Adjust as needed */
+  padding: 20px 30px; /* Add vertical padding when open */
+  border-top: 1px solid var(--card-border, #e5e7eb);
+}
+
+.inline-help-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inline-help-form label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary, #6b7280);
+}
+
+.inline-help-form textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--card-border, #e5e7eb);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--text-primary, #1f2937);
+  background-color: var(--card-bg, #ffffff);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  resize: vertical; /* Allow vertical resize */
+  min-height: 60px;
+  font-family: inherit; /* Ensure consistent font */
+}
+.inline-help-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.1);
+}
+
+.inline-help-form button[type="submit"] {
+  padding: 10px 15px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  align-self: flex-start; /* Align button left */
+}
+.inline-help-form button[type="submit"]:hover {
+  opacity: 0.9;
+}
+.inline-help-form button[type="submit"]:active {
+  transform: scale(0.98);
+}
+.inline-help-form button[type="submit"] svg {
+  font-size: 0.9em;
+}

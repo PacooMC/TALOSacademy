@@ -1,0 +1,164 @@
+:root {
+  --sidebar-bg-color: #1a1f2b; /* Keep original dark bg */
+  --sidebar-text-color: #e2e8f0; /* Lighter gray text */
+  --sidebar-icon-color: #94a3b8; /* Muted icon color */
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.05); /* Subtler hover */
+  --sidebar-active-bg: rgba(65, 105, 225, 0.1); /* Use primary color with low opacity for active bg */
+  --sidebar-active-border: var(--primary-color);
+  --sidebar-width: 230px; /* Slightly wider */
+  --sidebar-collapsed-width: 70px; /* Slightly wider collapsed */
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--sidebar-bg-color);
+  color: var(--sidebar-text-color);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
+  overflow-x: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+/* Logo Container Styles */
+.logo-container {
+  padding: 15px 20px; /* Adjusted padding */
+  margin-bottom: 15px;
+  text-align: center;
+  height: 60px; /* Match header height */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center logo when collapsed */
+  overflow: hidden;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.sidebar-logo {
+  height: 30px; /* Adjust height as needed */
+  width: auto;
+  transition: all 0.3s ease;
+  display: block; /* Ensure it behaves like a block */
+}
+
+.sidebar-logo.collapsed {
+  height: 24px; /* Smaller logo when collapsed */
+  /* Optionally, if the logo SVG needs clipping or specific viewbox for collapsed state */
+  /* width: 24px; */
+  /* object-fit: cover; */
+  /* object-position: left center; */
+}
+
+/* Remove old .logo text styles if logo replaces it */
+/*
+.logo {
+  padding: 18px 20px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+}
+
+.sidebar.collapsed .logo {
+  padding: 18px 10px;
+  font-size: 18px;
+}
+*/
+
+.sidebar-nav {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 10px; /* Add horizontal padding to nav container */
+}
+/* Hide scrollbar */
+.sidebar-nav::-webkit-scrollbar { display: none; }
+.sidebar-nav { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+.sidebar-item {
+  padding: 10px 15px; /* Adjusted padding */
+  margin-bottom: 4px; /* Space between items */
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-left-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 14px; /* Slightly increased gap */
+  white-space: nowrap;
+  overflow: hidden;
+  border-left: 4px solid transparent; /* Thicker indicator */
+  border-radius: 6px; /* Rounded corners for items */
+  color: var(--sidebar-text-color); /* Use variable */
+}
+
+.sidebar.collapsed .sidebar-item {
+  justify-content: center;
+  padding: 10px;
+  gap: 0;
+  border-left-width: 0; /* Remove left border when collapsed */
+}
+
+.sidebar-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 22px; /* Ensure consistent icon width */
+  text-align: center;
+  color: var(--sidebar-icon-color); /* Use variable */
+  transition: color 0.2s ease;
+}
+
+.sidebar-item span {
+  transition: opacity 0.2s ease;
+  opacity: 1;
+  font-size: 0.9rem; /* Slightly smaller font */
+  font-weight: 500; /* Medium weight */
+}
+
+.sidebar.collapsed .sidebar-item span {
+  opacity: 0;
+  width: 0;
+}
+
+.sidebar-item:hover {
+  background-color: var(--sidebar-hover-bg);
+  color: #ffffff; /* White text on hover */
+}
+.sidebar-item:hover .sidebar-icon {
+  color: #ffffff; /* White icon on hover */
+}
+
+.sidebar-item.active {
+  background-color: var(--sidebar-active-bg);
+  font-weight: 600;
+  color: #ffffff; /* White text for active */
+  border-left-color: var(--sidebar-active-border);
+}
+.sidebar-item.active .sidebar-icon {
+  color: var(--sidebar-active-border); /* Icon color matches border */
+}
+
+.sidebar.collapsed .sidebar-item.active {
+  background-color: var(--sidebar-active-bg); /* Keep same active bg */
+}
+.sidebar.collapsed .sidebar-item.active .sidebar-icon {
+   color: var(--sidebar-active-border); /* Keep icon color */
+}
+
+/* Footer for settings */
+.sidebar-footer {
+  padding: 10px;
+  margin-top: auto; /* Push to bottom */
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Separator */
+}

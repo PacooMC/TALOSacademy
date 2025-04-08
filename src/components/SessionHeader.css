@@ -1,0 +1,92 @@
+.session-header-card {
+  background-color: var(--card-bg, #ffffff);
+  border-radius: 10px;
+  border: 1px solid var(--card-border, #e5e7eb);
+  padding: 22px 28px; /* Slightly increased padding */
+  box-shadow: var(--card-shadow, 0 1px 2px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.03));
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.header-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping */
+  gap: 15px;
+}
+
+.header-info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary, #6b7280);
+}
+.header-info-item svg {
+  color: var(--icon-color, #4169e1);
+}
+
+.edit-focus-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary, #6b7280);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.edit-focus-btn:hover {
+  color: var(--text-primary, #1f2937);
+  background-color: #f3f4f6;
+}
+
+.header-focus {
+  display: flex;
+  align-items: flex-start; /* Align icon top */
+  gap: 12px;
+  padding-top: 10px;
+}
+.focus-icon {
+  color: var(--icon-color, #4169e1);
+  font-size: 1.2rem;
+  margin-top: 2px; /* Align with text */
+}
+.focus-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.focus-details strong {
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  font-size: 1rem;
+}
+.focus-nodes-list {
+  font-size: 0.95rem;
+  color: var(--text-secondary, #6b7280);
+}
+.focus-node-tag {
+  /* Add styling if needed, e.g., background */
+}
+
+.header-reminders {
+  border-top: 1px solid var(--card-border, #e5e7eb);
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.reminder-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary, #6b7280);
+}
+.reminder-item svg {
+  color: #9ca3af; /* Gray icon for reminders */
+  font-size: 1rem;
+}

@@ -1,0 +1,112 @@
+.help-panel-overlay {
+  position: absolute; /* Position relative to DailyCoach container */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it's above other content */
+  padding: 20px; /* Padding around the panel */
+}
+
+.help-panel {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 550px; /* Limit panel width */
+  max-height: 80vh; /* Limit panel height */
+  display: flex;
+  flex-direction: column;
+  position: relative; /* For close button positioning */
+  overflow: hidden; /* Clip content if needed */
+}
+
+.help-panel-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  z-index: 1; /* Above header */
+}
+.help-panel-close-btn:hover {
+  color: #6b7280;
+  background-color: #f3f4f6;
+}
+
+.help-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 25px;
+  border-bottom: 1px solid var(--card-border, #e5e7eb);
+  background-color: #f9fafb; /* Light header background */
+}
+.help-panel-header .help-icon {
+  color: #f59e0b; /* Amber color for lightbulb */
+  font-size: 1.4rem;
+}
+.help-panel-header h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  margin: 0;
+}
+
+.help-panel-content {
+  padding: 25px;
+  overflow-y: auto; /* Allow content scrolling */
+  flex-grow: 1;
+}
+.help-panel-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+.help-panel-content li {
+  padding-left: 25px;
+  position: relative;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary, #6b7280);
+}
+.help-panel-content li::before {
+  content: '•'; /* Bullet point */
+  position: absolute;
+  left: 5px;
+  top: 0px;
+  color: var(--primary-color, #4169e1);
+  font-size: 1.2em;
+  line-height: inherit;
+}
+
+.help-question {
+  font-weight: 500;
+  color: var(--text-primary, #1f2937);
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.help-interaction-placeholder {
+  font-style: italic;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 15px;
+  border: 1px dashed #d1d5db;
+  border-radius: 6px;
+  background-color: #f9fafb;
+}

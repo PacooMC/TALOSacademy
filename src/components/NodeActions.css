@@ -1,0 +1,48 @@
+.node-actions {
+  display: flex;
+  flex-wrap: wrap; /* Allow actions to wrap */
+  gap: 10px;
+  /* Removed padding-top and border-top as they are now handled by the footer */
+}
+
+.node-actions button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  color: #4b5563;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.node-actions button:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+.node-actions button svg {
+  font-size: 0.9em;
+}
+
+/* Specific styles for Complete/Pending buttons */
+.node-actions button.action-complete {
+  background-color: #dcfce7; /* Light green */
+  border-color: #86efac; /* Medium green */
+  color: #15803d; /* Dark green */
+}
+.node-actions button.action-complete:hover {
+  background-color: #bbf7d0;
+  border-color: #4ade80;
+}
+.node-actions button.action-pending {
+  background-color: #ffedd5; /* Light orange */
+  border-color: #fed7aa; /* Medium orange */
+  color: #9a3412; /* Dark orange */
+}
+.node-actions button.action-pending:hover {
+  background-color: #fed7aa;
+  border-color: #fb923c;
+}

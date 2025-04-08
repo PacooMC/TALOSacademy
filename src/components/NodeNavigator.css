@@ -1,0 +1,243 @@
+:root {
+  /* Re-declare variables if needed, or ensure they are globally available */
+  --navigator-width: 280px;
+  --navigator-collapsed-width: 60px; /* Slightly wider for better icon spacing */
+  --navigator-bg: #ffffff;
+  --navigator-border: #e5e7eb;
+  --navigator-header-bg: #f9fafb;
+  --navigator-text-secondary: #6b7280;
+  --navigator-text-primary: #1f2937;
+  --navigator-icon-color: #9ca3af;
+  --navigator-hover-bg: #f3f4f6;
+  --navigator-active-bg: #eef2ff; /* Light blue */
+  --navigator-active-text: var(--primary-color, #4169e1);
+  --navigator-active-icon: var(--primary-color, #4169e1);
+  --navigator-collapsed-bg: #f9fafb; /* Background when collapsed */
+  --navigator-collapsed-active-bg: var(--primary-color); /* Active background when collapsed */
+  --navigator-collapsed-active-text: #ffffff; /* Active text color when collapsed */
+  --status-completed-color: #16a34a; /* Green for completed */
+  --status-completed-bg-light: #f0fdf4; /* Light green background */
+}
+
+.node-navigator {
+  width: var(--navigator-width);
+  background-color: var(--navigator-bg);
+  border-right: 1px solid var(--navigator-border);
+  padding: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+  position: relative;
+}
+
+.node-navigator.collapsed {
+  width: var(--navigator-collapsed-width);
+  background-color: var(--navigator-collapsed-bg);
+}
+
+.navigator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px 15px 25px;
+  border-bottom: 1px solid var(--navigator-border);
+  background-color: var(--navigator-header-bg);
+  flex-shrink: 0;
+  transition: padding 0.3s ease, border-bottom-color 0.3s ease;
+  height: 55px; /* Fixed height for header */
+  box-sizing: border-box;
+}
+.node-navigator.collapsed .navigator-header {
+   padding: 0; /* Remove padding */
+   justify-content: center; /* Center the toggle button */
+   border-bottom-color: transparent; /* Hide border when collapsed */
+}
+
+
+.navigator-header h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navigator-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 0.2s ease; /* Fade out title */
+}
+.node-navigator.collapsed .navigator-header h4 {
+  opacity: 0;
+  width: 0;
+  position: absolute; /* Remove from layout */
+}
+
+.navigator-toggle-btn {
+  background: none;
+  border: 1px solid transparent; /* Make border transparent by default */
+  color: var(--navigator-text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease; /* Added border-color transition */
+  margin-left: 10px; /* Space from title when expanded */
+}
+.navigator-toggle-btn:hover {
+  color: var(--navigator-text-primary);
+  background-color: #e5e7eb; /* Keep background on hover */
+  border-color: #d1d5db; /* Add subtle border on hover */
+  transform: scale(1.05); /* Slightly smaller scale */
+}
+.node-navigator.collapsed .navigator-toggle-btn {
+   margin-left: 0; /* No margin needed when centered */
+}
+
+.navigator-list {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+.navigator-list::-webkit-scrollbar { display: none; }
+.navigator-list { -ms-overflow-style: none; scrollbar-width: none; }
+
+.navigator-list li button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 4px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--navigator-text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 40px; /* Fixed height for items */
+  box-sizing: border-box;
+}
+
+.node-navigator.collapsed .navigator-list {
+   padding: 10px 8px; /* Adjust padding for collapsed state */
+}
+
+.node-navigator.collapsed .navigator-list li button {
+  justify-content: center;
+  padding: 0; /* Remove padding, center icon/index */
+  gap: 0;
+  width: 44px; /* Fixed width for button */
+  height: 44px; /* Fixed height */
+  margin: 4px auto; /* Center button horizontally */
+  position: relative; /* Needed for absolute positioning if used */
+}
+
+/* Style for the index number when collapsed */
+.nav-index {
+  font-size: 1rem; /* Adjust size as needed */
+  font-weight: 600;
+  color: var(--navigator-text-secondary); /* Default color */
+  transition: color 0.2s ease;
+  line-height: 44px; /* Center vertically */
+  text-align: center;
+  width: 100%;
+}
+
+.nav-icon {
+  color: var(--navigator-icon-color);
+  font-size: 1.1rem; /* Slightly larger icon */
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+  width: 20px; /* Ensure consistent icon width */
+  text-align: center;
+}
+
+/* Status Icon Styling */
+.nav-status-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+.nav-status-icon.completed {
+  color: var(--status-completed-color);
+}
+
+.nav-text {
+   transition: opacity 0.2s ease;
+   opacity: 1;
+   font-weight: 500;
+}
+
+.node-navigator.collapsed .nav-text {
+  opacity: 0;
+  width: 0;
+  position: absolute; /* Remove from layout */
+}
+
+.navigator-list li button:hover {
+  background-color: var(--navigator-hover-bg);
+}
+
+/* Expanded Active State */
+.navigator-list li.active button {
+  background-color: var(--navigator-active-bg);
+  color: var(--navigator-active-text);
+  font-weight: 600;
+}
+.navigator-list li.active button .nav-icon,
+.navigator-list li.active button .nav-status-icon.completed { /* Keep completed color when active */
+  color: var(--navigator-active-icon);
+}
+
+/* Collapsed Active State */
+.node-navigator.collapsed .navigator-list li.active button {
+  background-color: var(--navigator-collapsed-active-bg); /* Use solid primary color */
+}
+/* Style for active index number */
+.node-navigator.collapsed .navigator-list li.active button .nav-index {
+  color: var(--navigator-collapsed-active-text); /* White index on active collapsed */
+}
+/* Style for active completed icon when collapsed */
+.node-navigator.collapsed .navigator-list li.active button .nav-status-icon.completed {
+  color: var(--navigator-collapsed-active-text); /* White checkmark */
+}
+
+/* Completed State Styling (Non-Active) */
+.navigator-list li.status-completed button {
+  /* Optional: Slightly different background or text color for completed items */
+  /* background-color: var(--status-completed-bg-light); */
+  color: var(--navigator-text-secondary); /* Muted text for completed */
+}
+.navigator-list li.status-completed button:hover {
+  background-color: var(--navigator-hover-bg); /* Keep standard hover */
+}
+.node-navigator.collapsed .navigator-list li.status-completed button {
+   /* Optional: Style for collapsed completed items */
+}
+.node-navigator.collapsed .navigator-list li.status-completed button .nav-status-icon.completed {
+   color: var(--status-completed-color); /* Keep green checkmark */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  /* Hide navigator completely or change its position */
+  .node-navigator {
+     /* Example: position: absolute; left: -100%; */
+     /* Or adjust width/collapsed width for small screens */
+  }
+}

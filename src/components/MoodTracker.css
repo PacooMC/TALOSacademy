@@ -1,0 +1,31 @@
+.mood-tracker {
+  display: flex;
+  gap: 10px; /* Reduced gap */
+}
+
+.mood-option {
+  width: 50px; /* Smaller */
+  height: 50px;
+  border-radius: 50%; /* Circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+  font-size: 1.6rem; /* Adjusted emoji size */
+  background-color: #f9fafb; /* Light background */
+  transition: all 0.2s ease;
+  cursor: pointer;
+  color: #4b5563; /* Default emoji color */
+}
+
+.mood-option:hover {
+  transform: scale(1.05);
+  border-color: #d1d5db;
+}
+
+.mood-option.selected {
+  transform: scale(1.1);
+  border-color: transparent; /* Remove border when selected */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  /* Background color is set inline via style prop */
+}

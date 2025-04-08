@@ -1,0 +1,391 @@
+/* === Exercises Page Styles === */
+:root {
+  --exercises-bg: #f8f9fa; /* Slightly off-white background */
+  --exercises-card-bg: #ffffff;
+  --exercises-border: #dee2e6;
+  --exercises-header-bg: #e9ecef;
+  --exercises-primary-action: var(--primary-color, #4169e1);
+  --exercises-secondary-action: #6c757d; /* Bootstrap secondary color */
+  --exercises-text-primary: #212529; /* Bootstrap default text */
+  --exercises-text-secondary: #6c757d;
+  --exercises-set-hover: #f1f3f5;
+  --exercises-set-active: #e9ecef;
+  --exercises-delete-color: #dc3545; /* Bootstrap danger */
+  --exercises-delete-hover-bg: #f8d7da;
+  --exercises-solution-bg: #f8f9fa;
+  --exercises-solution-border: #e9ecef;
+  --exercises-tab-inactive: #ced4da;
+  --exercises-tab-active-border: var(--primary-color, #4169e1);
+  --exercises-tab-active-bg: #ffffff;
+  --set-type-uploaded: #0d6efd; /* Bootstrap primary */
+  --set-type-generated: #198754; /* Bootstrap success */
+}
+
+.exercises-page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--exercises-bg);
+  padding: 25px 35px;
+  gap: 25px;
+  overflow-y: auto; /* Allow scrolling for the whole page if needed */
+}
+
+/* --- Header --- */
+.exercises-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--exercises-border);
+}
+
+.exercises-header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--exercises-text-primary);
+  margin: 0;
+}
+
+.exercises-main-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.exercises-main-actions .action-btn {
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s ease;
+}
+.exercises-main-actions .action-btn svg {
+  font-size: 1em;
+}
+.exercises-main-actions .action-btn.primary {
+  background-color: var(--exercises-primary-action);
+  color: white;
+}
+.exercises-main-actions .action-btn.secondary {
+  background-color: var(--exercises-secondary-action);
+  color: white;
+}
+.exercises-main-actions .action-btn:hover {
+  opacity: 0.85;
+}
+
+/* --- Exercise Sets List --- */
+.exercise-sets-list {
+  background-color: var(--exercises-card-bg);
+  border: 1px solid var(--exercises-border);
+  border-radius: 8px;
+  padding: 22px 25px; /* Slightly increased padding */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.exercise-sets-list h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--exercises-text-primary);
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--exercises-border);
+}
+
+.exercise-sets-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 250px; /* Limit height and allow scroll */
+  overflow-y: auto;
+}
+
+.exercise-sets-list li {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+  border: 1px solid transparent; /* For active state */
+}
+.exercise-sets-list li:hover {
+  background-color: var(--exercises-set-hover);
+}
+.exercise-sets-list li.active {
+  background-color: var(--exercises-set-active);
+  border-color: #adb5bd;
+}
+
+.set-type-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.set-type-indicator.uploaded { background-color: var(--set-type-uploaded); }
+.set-type-indicator.generated { background-color: var(--set-type-generated); }
+
+.set-name {
+  flex-grow: 1;
+  font-weight: 500;
+  color: var(--exercises-text-primary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.set-name:hover {
+  text-decoration: underline;
+}
+
+.set-actions {
+  display: flex;
+  gap: 5px;
+  margin-left: 15px;
+}
+
+.set-actions .icon-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--exercises-text-secondary);
+  font-size: 0.9rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.set-actions .icon-btn:hover {
+  color: var(--exercises-text-primary);
+  background-color: #dee2e6;
+}
+.set-actions .icon-btn.delete-btn:hover {
+  color: var(--exercises-delete-color);
+  background-color: var(--exercises-delete-hover-bg);
+}
+
+.no-sets-message {
+  color: var(--exercises-text-secondary);
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+/* --- Exercise Viewer Area --- */
+.exercise-viewer-area {
+  flex-grow: 1; /* Take remaining space */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-height: 400px; /* Ensure minimum height */
+}
+
+.exercise-tabs {
+  display: flex;
+  flex-wrap: wrap; /* Allow tabs to wrap */
+  gap: 5px;
+  border-bottom: 2px solid var(--exercises-border);
+  padding-bottom: 5px; /* Space between tabs and border */
+}
+
+.exercise-tab {
+  padding: 8px 15px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px; /* Overlap border-bottom */
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--exercises-text-secondary);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.exercise-tab:hover {
+  color: var(--exercises-text-primary);
+}
+.exercise-tab.active {
+  color: var(--exercises-primary-action);
+  border-bottom-color: var(--exercises-tab-active-border);
+}
+
+.exercise-card {
+  background-color: var(--exercises-card-bg);
+  border: 1px solid var(--exercises-border);
+  border-radius: 8px;
+  padding: 28px; /* Slightly increased padding */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  flex-grow: 1; /* Allow card to fill space */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.exercise-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--exercises-text-primary);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.exercise-statement-section {
+  /* No specific styles needed unless separating further */
+}
+
+.exercise-statement-section h4 {
+  font-size: 1rem;
+  font-weight: 600;```css
+
+  color: var(--exercises-text-secondary);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.exercise-statement-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--exercises-text-primary);
+  margin-bottom: 15px; /* Space before figure */
+}
+
+/* Figure Styling */
+.exercise-figure {
+  margin: 15px 0;
+  padding: 15px;
+  background-color: #f8f9fa; /* Light background for figure */
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.exercise-figure img,
+.exercise-figure .placeholder-svg {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.figure-caption {
+  font-size: 0.85rem;
+  color: var(--exercises-text-secondary);
+  font-style: italic;
+}
+
+/* Solution Display Styling */
+.solution-display {
+  border-top: 1px dashed var(--exercises-border);
+  padding-top: 20px;
+}
+
+.solution-toggle {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  background-color: #ffffff;
+  color: #495057;
+  cursor: pointer;
+  display: inline-flex; /* Fit content */
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-bottom: 15px; /* Space before content if open */
+}
+.solution-toggle:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+.solution-toggle svg {
+  font-size: 1em;
+  color: #fd7e14; /* Bootstrap warning color */
+}
+.solution-display.open .solution-toggle {
+  background-color: #fff3cd; /* Bootstrap warning light */
+  border-color: #ffeeba;
+  color: #856404; /* Bootstrap warning dark */
+}
+
+.solution-content {
+  background-color: var(--exercises-solution-bg);
+  border: 1px solid var(--exercises-solution-border);
+  border-radius: 6px;
+  padding: 15px 20px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--exercises-text-primary);
+}
+.solution-content ol {
+  padding-left: 25px;
+  margin: 0;
+}
+.solution-content li {
+  margin-bottom: 8px;
+}
+.solution-content li:last-child {
+  margin-bottom: 0;
+}
+.no-solution {
+  font-style: italic;
+  color: var(--exercises-text-secondary);
+}
+
+/* Exercise Card Actions */
+.exercise-card-actions {
+  border-top: 1px solid var(--exercises-border);
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start; /* Align actions left */
+}
+
+.exercise-card-actions button {
+  padding: 9px 15px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  background-color: #f8f9fa;
+  color: #495057;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.exercise-card-actions button:hover {
+  border-color: #adb5bd;
+  background-color: #e9ecef;
+}
+.exercise-card-actions button svg {
+  font-size: 1em;
+}
+
+/* Placeholder */
+.exercise-viewer-placeholder {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--exercises-text-secondary);
+  font-size: 1.1rem;
+  background-color: var(--exercises-card-bg);
+  border: 1px dashed var(--exercises-border);
+  border-radius: 8px;
+  padding: 40px;
+}

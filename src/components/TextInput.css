@@ -1,0 +1,25 @@
+.text-input-container {
+  width: 100%; /* Ensure container takes full width */
+}
+
+.text-input {
+  width: 100%;
+  padding: 10px 14px; /* Consistent padding */
+  border: 1px solid var(--card-border, #e5e7eb); /* Use variable */
+  border-radius: 8px; /* Consistent rounding */
+  font-size: 0.95rem; /* Consistent font size */
+  color: var(--text-primary, #1f2937);
+  background-color: var(--card-bg, #ffffff);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.text-input::placeholder {
+  color: var(--text-placeholder, #9ca3af);
+  opacity: 1; /* Ensure placeholder is visible */
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.1); /* Consistent focus */
+}

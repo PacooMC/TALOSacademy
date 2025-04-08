@@ -1,0 +1,154 @@
+.header {
+  height: 60px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: sticky; /* Make header sticky */
+  top: 0;
+  z-index: 90; /* Below sidebar */
+  flex-shrink: 0; /* Prevent header shrinking */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.sidebar-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #555;
+  cursor: pointer;
+  padding: 5px;
+  display: flex; /* Align icon nicely */
+  align-items: center;
+  justify-content: center;
+}
+.sidebar-toggle-btn:hover {
+  color: #000;
+}
+
+/* --- User Menu Styles --- */
+.user-menu-container {
+  position: relative; /* Needed for dropdown positioning */
+}
+
+.user-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 6px 10px; /* Add some padding */
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.user-menu-trigger:hover,
+.user-menu-trigger[aria-expanded="true"] { /* Style when open */
+  background-color: #f3f4f6; /* Light gray background on hover/open */
+}
+
+.user-avatar-icon {
+  font-size: 1.6rem; /* Larger avatar icon */
+  color: #6b7280; /* Medium gray */
+}
+
+.user-name {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #374151; /* Darker gray */
+}
+
+/* Dropdown Menu */
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px); /* Position below the trigger */
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 200px; /* Minimum width */
+  z-index: 100; /* Above other header content */
+  overflow: hidden; /* Ensure rounded corners clip content */
+  padding: 8px 0; /* Padding top/bottom */
+  animation: fadeIn 0.15s ease-out; /* Simple fade-in */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-header {
+  padding: 10px 15px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  border-bottom: 1px solid #f3f4f6;
+  margin-bottom: 5px;
+}
+.dropdown-header strong {
+  color: #374151;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #374151;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.dropdown-item svg {
+  color: #9ca3af; /* Icon color */
+  font-size: 1em;
+  width: 16px; /* Align icons */
+  text-align: center;
+}
+.dropdown-item:hover {
+  background-color: #f3f4f6; /* Hover background */
+  color: #1f2937;
+}
+.dropdown-item:hover svg {
+  color: #6b7280;
+}
+
+
+/* --- Remove Old User Info Styles --- */
+/*
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info span {
+  font-weight: 500;
+}
+
+.user-info button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.user-info button:hover {
+  opacity: 0.9;
+}
+*/

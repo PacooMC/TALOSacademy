@@ -1,0 +1,29 @@
+:root {
+  --primary-color: #4169e1;
+  --sidebar-color: #1a1f2b;
+  --card-bg: #f5f7fa;
+  --light-blue: #e6f0ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: white;
+  color: #333;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}

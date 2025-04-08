@@ -1,0 +1,41 @@
+.plan-items {
+  display: flex;
+  gap: 20px;
+}
+
+.plan-item {
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.plan-item-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  margin-right: 15px;
+  font-size: 20px;
+}
+
+.plan-item-icon.notes {
+  background-color: var(--light-blue);
+  color: var(--primary-color);
+}
+
+.plan-item-icon.test {
+  background-color: #e2f8e9;
+  color: #28a745;
+}
+
+.plan-item-text {
+  font-size: 16px;
+  font-weight: 500;
+}

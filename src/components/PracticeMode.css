@@ -1,0 +1,440 @@
+/* === Practice Mode Styles (Refactored Workflow) === */
+:root {
+  --practice-bg: #f8f9fa;
+  --practice-card-bg: #ffffff;
+  --practice-border: #dee2e6;
+  --practice-text-primary: #212529;
+  --practice-text-secondary: #6c757d;
+  --practice-dropzone-bg: #e9ecef;
+  --practice-dropzone-border: #ced4da;
+  --practice-button-primary: var(--primary-color, #4169e1);
+  --practice-button-secondary: #6c757d;
+  --practice-processing-color: #fd7e14; /* Orange */
+  --practice-success-color: #198754; /* Green */
+  --practice-section-border: #f1f3f5;
+}
+
+.practice-mode-container {
+  flex: 1;
+  padding: 25px 35px;
+  background-color: var(--practice-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  overflow-y: auto;
+}
+
+.practice-mode-container h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--practice-text-primary);
+  margin-bottom: 0;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--practice-border);
+}
+
+.practice-step {
+  background-color: var(--practice-card-bg);
+  border: 1px solid var(--practice-border);
+  border-radius: 8px;
+  padding: 25px 30px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.practice-step h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--practice-text-primary);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* --- Upload Guion Step --- */
+.upload-guion-step .upload-drop-zone { /* Reuse dropzone style */
+  border: 2px dashed var(--practice-dropzone-border);
+  border-radius: 8px;
+  padding: 35px;
+  text-align: center;
+  background-color: var(--practice-dropzone-bg);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+.upload-guion-step .upload-drop-zone:hover {
+  border-color: var(--practice-button-primary);
+  background-color: #f1f3f5;
+}
+.upload-guion-step .upload-icon {
+  font-size: 2.5rem;
+  color: var(--practice-text-secondary);
+  margin-bottom: 15px;
+}
+.upload-guion-step .upload-drop-zone p {
+  color: var(--practice-text-secondary);
+  margin: 10px 0;
+  font-size: 0.95rem;
+}
+.upload-guion-step .upload-button { /* Reuse upload button */
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--practice-button-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+}
+.upload-guion-step .upload-button:hover {
+  opacity: 0.9;
+}
+
+.processing-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: var(--practice-processing-color);
+  padding: 40px 20px;
+  text-align: center;
+}
+.spinner-icon {
+  animation: spin 1.5s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.guion-uploaded-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  background-color: #e6f9f0; /* Light green */
+  border: 1px solid #b6e9d1;
+  border-radius: 6px;
+  color: var(--practice-success-color);
+  font-size: 1rem;
+}
+.guion-uploaded-info .check-icon {
+  font-size: 1.2em;
+}
+.guion-uploaded-info strong {
+  font-weight: 600;
+  flex-grow: 1; /* Push button to the right */
+  color: #0f5132; /* Darker green */
+}
+.change-guion-btn {
+  background: none;
+  border: 1px solid var(--practice-success-color);
+  color: var(--practice-success-color);
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+.change-guion-btn:hover {
+  background-color: var(--practice-success-color);
+  color: white;
+}
+
+/* --- Guided Upload Step --- */
+.structure-display .exercise-header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--practice-text-primary);
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--practice-border);
+}
+.structure-display .exercise-header:first-child {
+  margin-top: 0;
+}
+
+.section-upload-block {
+  border: 1px solid var(--practice-section-border);
+  border-radius: 6px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fdfdff; /* Slightly off-white */
+}
+.section-upload-block h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--practice-text-secondary);
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.section-inputs {
+  display: grid;
+  grid-template-columns: 1fr; /* Stack inputs by default */
+  gap: 20px;
+}
+
+@media (min-width: 768px) { /* Side-by-side on larger screens */
+  .section-inputs {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--practice-text-secondary);
+}
+.input-group input[type="file"] {
+  font-size: 0.9rem;
+  /* Basic styling, browser defaults vary */
+}
+.input-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--practice-border);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--practice-text-primary);
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+.input-group textarea:focus {
+  outline: none;
+  border-color: var(--practice-button-primary);
+  box-shadow: 0 0 0 2px rgba(65, 105, 225, 0.1);
+}
+
+.section-file-list { /* Reuse style from previous version */
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  max-height: 100px;
+  overflow-y: auto;
+  font-size: 0.85rem;
+}
+.section-file-list li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+.section-file-list li svg {
+  color: var(--practice-text-secondary);
+  font-size: 1em;
+  flex-shrink: 0;
+}
+.section-file-list li span {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.section-file-list li button {
+  background: none;
+  border: none;
+  color: var(--practice-text-secondary);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+.section-file-list li button:hover {
+  color: #dc3545;
+}
+
+/* --- Analysis & Report Steps --- */
+.action-button { /* General style for action buttons */
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex; /* Fit content */
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+.action-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.action-button svg {
+  font-size: 1.1em;
+}
+.action-button .spinner-icon {
+  font-size: 1em; /* Make spinner slightly smaller */
+}
+
+.analyze-btn {
+  background-color: var(--practice-button-primary);
+  color: white;
+}
+.analyze-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.view-analysis-btn {
+  background-color: #f8f9fa;
+  color: var(--practice-text-primary);
+  border: 1px solid var(--practice-border);
+  margin-left: 10px;
+}
+.view-analysis-btn:hover {
+   background-color: #e9ecef;
+}
+
+
+.generate-report-btn {
+  background-color: var(--practice-button-secondary);
+  color: white;
+}
+.generate-report-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.final-report-preview {
+  margin-top: 20px;
+  border-top: 1px solid var(--practice-border);
+  padding-top: 20px;
+}
+.final-report-preview h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--practice-text-secondary);
+  margin-bottom: 10px;
+}
+.final-report-preview textarea {
+  width: 100%;
+  min-height: 300px;
+  padding: 12px 15px;
+  border: 1px solid var(--practice-border);
+  border-radius: 4px;
+  font-family: monospace; /* Use monospace for Markdown */
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--practice-text-primary);
+  background-color: #f8f9fa;
+  resize: vertical;
+}
+.download-report-btn {
+    margin-top: 15px;
+    background-color: var(--practice-success-color);
+    color: white;
+    border: none;
+}
+.download-report-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* --- Analysis Results Modal --- */
+.analysis-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  padding: 20px;
+}
+
+.analysis-modal {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 700px; /* Wider modal for results */
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.analysis-modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  z-index: 1;
+}
+.analysis-modal-close-btn:hover {
+  color: #6b7280;
+  background-color: #f3f4f6;
+}
+
+.analysis-modal h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--practice-text-primary);
+  margin: 0;
+  padding: 20px 25px;
+  border-bottom: 1px solid var(--practice-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.analysis-modal h3 svg {
+  color: var(--practice-button-primary);
+  font-size: 1.1em;
+}
+
+.analysis-modal-content {
+  padding: 25px;
+  overflow-y: auto;
+  flex-grow: 1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--practice-text-secondary);
+}
+.analysis-modal-content pre { /* Style for simple preformatted text */
+  white-space: pre-wrap; /* Wrap long lines */
+  word-wrap: break-word;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .practice-mode-container {
+    padding: 15px 20px;
+    gap: 20px;
+  }
+  .practice-step {
+    padding: 20px;
+  }
+  .section-inputs {
+    grid-template-columns: 1fr; /* Force stacking on small screens */
+  }
+}

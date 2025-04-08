@@ -1,0 +1,222 @@
+/* Styles similar to NodeNavigator, but adapted for topics/subtopics */
+:root {
+  --topic-sidebar-width: 260px; /* Slightly different width */
+  --topic-sidebar-collapsed-width: 60px;
+  --topic-sidebar-bg: #ffffff;
+  --topic-sidebar-border: #e5e7eb;
+  --topic-sidebar-header-bg: #f9fafb;
+  --topic-sidebar-text-secondary: #6b7280;
+  --topic-sidebar-text-primary: #1f2937;
+  --topic-sidebar-icon-color: #9ca3af;
+  --topic-sidebar-hover-bg: #f3f4f6;
+  --topic-sidebar-active-bg: #eef2ff; /* Light blue */
+  --topic-sidebar-active-text: var(--primary-color, #4169e1);
+  --topic-sidebar-active-icon: var(--primary-color, #4169e1);
+  --topic-sidebar-collapsed-bg: #f9fafb;
+  --status-completed-color: #16a34a; /* Green for completed */
+  --status-completed-bg-light: #f0fdf4; /* Light green background */
+}
+
+.topic-sidebar {
+  width: var(--topic-sidebar-width);
+  background-color: var(--topic-sidebar-bg);
+  border-right: 1px solid var(--topic-sidebar-border);
+  padding: 0;
+  overflow: hidden; /* Prevent content overflow */
+  flex-shrink: 0;
+  height: 100%; /* Ensure it takes full height */
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.topic-sidebar.collapsed {
+  width: var(--topic-sidebar-collapsed-width);
+}
+
+.topic-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px 15px 25px;
+  border-bottom: 1px solid var(--topic-sidebar-border);
+  background-color: var(--topic-sidebar-header-bg);
+  flex-shrink: 0;
+  height: 55px; /* Match NodeNavigator header height */
+  box-sizing: border-box;
+}
+.topic-sidebar.collapsed .topic-sidebar-header {
+   padding: 0;
+   justify-content: center;
+   border-bottom-color: transparent;
+}
+
+.topic-sidebar-header h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--topic-sidebar-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 0.2s ease;
+}
+.topic-sidebar.collapsed .topic-sidebar-header h4 {
+  opacity: 0;
+  width: 0;
+  position: absolute;
+}
+
+.topic-sidebar-toggle-btn {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--topic-sidebar-text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-left: 10px;
+}
+.topic-sidebar-toggle-btn:hover {
+  color: var(--topic-sidebar-text-primary);
+  background-color: #e5e7eb;
+  border-color: #d1d5db;
+  transform: scale(1.05);
+}
+.topic-sidebar.collapsed .topic-sidebar-toggle-btn {
+   margin-left: 0;
+}
+
+.topic-list {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+.topic-list::-webkit-scrollbar { display: none; }
+.topic-list { -ms-overflow-style: none; scrollbar-width: none; }
+
+.topic-item {
+  margin-bottom: 10px; /* Space between topics */
+}
+
+.topic-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  font-weight: 600;
+  color: var(--topic-sidebar-text-primary);
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden; /* Prevent title overflow */
+}
+.topic-icon {
+  color: var(--topic-sidebar-icon-color);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+/* Apply text-overflow to the span containing the text */
+.topic-title span {
+  flex-grow: 1; /* Allow span to take available space */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topic-sidebar.collapsed .topic-title {
+  justify-content: center;
+  padding: 10px 0;
+}
+.topic-sidebar.collapsed .topic-title span {
+  display: none;
+}
+
+.subtopic-list {
+  list-style: none;
+  padding-left: 20px; /* Indent subtopics */
+  margin: 5px 0 0 10px; /* Space and align */
+  border-left: 1px solid #eee; /* Vertical line */
+}
+
+.subtopic-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  margin-bottom: 2px;
+  font-size: 0.9rem;
+  color: var(--topic-sidebar-text-secondary);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 5px;
+  white-space: nowrap;
+  overflow: hidden; /* Prevent subtopic overflow */
+}
+.subtopic-icon {
+  color: var(--topic-sidebar-icon-color);
+  font-size: 0.9em;
+  flex-shrink: 0;
+  width: 14px; /* Ensure space for icon */
+  text-align: center;
+}
+/* Status Icon Styling */
+.subtopic-status-icon {
+  font-size: 0.9em;
+  flex-shrink: 0;
+  width: 14px; /* Ensure space for icon */
+  text-align: center;
+  transition: color 0.2s ease;
+}
+.subtopic-status-icon.completed {
+  color: var(--status-completed-color);
+}
+
+/* Apply text-overflow to the span containing the text */
+.subtopic-item span {
+  flex-grow: 1; /* Allow span to take available space */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.subtopic-item:hover {
+  background-color: var(--topic-sidebar-hover-bg);
+  color: var(--topic-sidebar-text-primary);
+}
+.subtopic-item.active {
+  background-color: var(--topic-sidebar-active-bg);
+  color: var(--topic-sidebar-active-text);
+  font-weight: 500;
+}
+.subtopic-item.active .subtopic-icon,
+.subtopic-item.active .subtopic-status-icon.completed { /* Keep completed color when active */
+  color: var(--topic-sidebar-active-icon);
+}
+
+/* Completed State Styling (Non-Active) */
+.subtopic-item.status-completed {
+  /* Optional: Slightly different background or text color */
+  /* background-color: var(--status-completed-bg-light); */
+  color: var(--topic-sidebar-text-secondary); /* Muted text */
+}
+.subtopic-item.status-completed span {
+   text-decoration: line-through; /* Add line-through */
+   opacity: 0.7; /* Slightly faded */
+}
+.subtopic-item.status-completed:hover {
+  background-color: var(--topic-sidebar-hover-bg); /* Keep standard hover */
+}
+.subtopic-item.status-completed .subsubtopic-status-icon.completed {
+   color: var(--status-completed-color); /* Keep green checkmark */
+}
+
+
+/* Hide subtopics when collapsed */
+.topic-sidebar.collapsed .subtopic-list {
+  display: none;
+}

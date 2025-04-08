@@ -1,0 +1,164 @@
+/* Import Inter font if not already done globally */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Define CSS variables in :root for consistency */
+:root {
+  --font-family-sans: 'Inter', sans-serif;
+  --primary-color: #4169e1; /* Royal Blue */
+  --sidebar-bg-color: #1a1f2b;
+  --sidebar-text-color: #e2e8f0;
+  --sidebar-icon-color: #94a3b8;
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.05);
+  --sidebar-active-bg: rgba(65, 105, 225, 0.1);
+  --sidebar-active-border: var(--primary-color);
+  --sidebar-width: 230px;
+  --sidebar-collapsed-width: 70px;
+
+  --navigator-width: 280px;
+  --navigator-collapsed-width: 60px; /* Match NodeNavigator.css */
+  --navigator-bg: #ffffff;
+  --navigator-border: #e5e7eb;
+  --navigator-header-bg: #f9fafb;
+  --navigator-text-secondary: #6b7280;
+  --navigator-text-primary: #1f2937;
+  --navigator-icon-color: #9ca3af;
+  --navigator-hover-bg: #f3f4f6;
+  --navigator-active-bg: #eef2ff; /* Light blue */
+  --navigator-active-text: var(--primary-color);
+  --navigator-active-icon: var(--primary-color);
+
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --card-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --light-blue: #eef2ff; /* Light blue for backgrounds */
+
+  --formula-bg: #f3f4f6; /* Background for formulas */
+  --formula-border: #d1d5db; /* Border for formulas */
+  --formula-text: #111827; /* Text color for formulas */
+  --font-family-mono: 'Courier New', Courier, monospace; /* Monospace font for formulas */
+}
+
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9fafb; /* Base background */
+  font-family: var(--font-family-sans); /* Apply base font */
+}
+
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Match sidebar transition */
+  margin-left: var(--sidebar-width); /* Default margin */
+}
+
+.app.sidebar-collapsed .main-area {
+  margin-left: var(--sidebar-collapsed-width); /* Margin when collapsed */
+}
+
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 25px 35px; /* Adjusted padding */
+}
+
+/* Adjust padding for wider screens */
+@media (min-width: 768px) {
+  .content-area {
+    padding: 30px 40px;
+  }
+}
+
+.placeholder {
+  background: #f0f0f0;
+  border: 1px dashed #ccc;
+  padding: 60px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 8px;
+  color: #777;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Global formula styling */
+.math-formula {
+  display: block; /* Make it a block element */
+  background-color: var(--formula-bg);
+  border: 1px solid var(--formula-border);
+  border-radius: 6px;
+  padding: 15px 20px; /* Padding inside formula block */
+  margin: 1.5em 0; /* Margin around formula block */
+  color: var(--formula-text);
+  font-family: var(--font-family-mono); /* Use monospace font */
+  font-size: 0.95em; /* Slightly smaller font size */
+  line-height: 1.6; /* Ensure good line spacing */
+  white-space: pre-wrap; /* Preserve whitespace and wrap */
+  overflow-x: auto; /* Allow horizontal scroll if needed */
+}
+/* Style code elements within formulas if used */
+.math-formula code {
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  color: inherit;
+}
+
+/* Styling for integral with limits above/below */
+.integral, .summation {
+  display: inline-flex; /* Use flex to align symbol and limits */
+  flex-direction: column; /* Stack limits vertically */
+  align-items: center; /* Center limits horizontally */
+  justify-content: center; /* Center vertically */
+  position: relative; /* For positioning limits */
+  margin: 0 0.3em; /* Space around the symbol */
+  font-size: 1.8em; /* Larger symbol */
+  line-height: 1; /* Prevent extra line height */
+  vertical-align: middle; /* Align with surrounding text */
+  min-height: 1.5em; /* Ensure minimum height for limits */
+}
+
+.integral::before {
+  content: '∫'; /* The integral symbol */
+  display: inline-block;
+  line-height: 1; /* Ensure symbol doesn't add extra height */
+}
+
+.summation::before {
+  content: 'Σ'; /* The summation symbol */
+  display: inline-block;
+  line-height: 1; /* Ensure symbol doesn't add extra height */
+}
+
+.integral sup,
+.integral sub,
+.summation sup,
+.summation sub {
+  display: block; /* Ensure they stack */
+  font-size: 0.5em; /* Smaller font size for limits */
+  line-height: 1; /* Compact line height */
+  position: absolute; /* Position relative to the span */
+  left: 0; /* Align left edge */
+  right: 0; /* Align right edge */
+  text-align: center;
+  font-family: var(--font-family-sans); /* Use standard font for limits */
+  color: var(--formula-text); /* Ensure text color matches */
+  white-space: nowrap; /* Prevent limits from wrapping */
+}
+
+.integral sup,
+.summation sup {
+   top: -0.6em; /* Adjust vertical position (negative moves up) - slightly more for Σ */
+}
+
+.integral sub,
+.summation sub {
+   bottom: -0.6em; /* Adjust vertical position (negative moves down) - slightly more for Σ */
+}

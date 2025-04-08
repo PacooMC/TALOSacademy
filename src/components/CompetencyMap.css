@@ -1,0 +1,434 @@
+.competency-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 25px 30px;
+      gap: 20px;
+      background-color: #f9fafb;
+    }
+
+    /* --- Toolbar --- */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .toolbar select,
+    .toolbar input {
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+      background: white;
+      color: #374151;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .toolbar select { cursor: pointer; }
+    .toolbar select:focus,
+    .toolbar input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.15);
+    }
+    .search-bar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      min-width: 150px; /* Prevent search bar becoming too small */
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    .search-bar input { padding-left: 35px; width: 100%; }
+    .toolbar-group { display: flex; gap: 5px; }
+    .toolbar-group button { padding: 9px 10px; }
+    .toolbar button {
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      background-color: #ffffff;
+      color: #4b5563;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 14px;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .toolbar button:hover { background-color: #f3f4f6; border-color: #9ca3af; }
+    .toolbar button.active { background-color: var(--light-blue); border-color: var(--primary-color); color: var(--primary-color); }
+    .toolbar button svg { font-size: 1em; }
+
+    /* --- Map Area --- */
+    .map-area {
+      flex: 1;
+      position: relative;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 2px 5px rgba(0,0,0,0.04);
+      cursor: grab;
+      user-select: none;
+    }
+    .map-area.panning {
+      cursor: grabbing;
+    }
+
+    .map-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* --- Topic Group Rectangles --- */
+    .topic-group-rect {
+      stroke: rgba(150, 160, 180, 0.3);
+      stroke-width: 1px;
+      /* Fill is set inline */
+    }
+
+    .topic-group-label {
+      font-size: 14px; /* Larger label */
+      font-weight: 600;
+      fill: #4b5563;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      pointer-events: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+
+    /* --- Edges --- */
+    .edge {
+      stroke: #cbd5e1;
+      stroke-width: 1.5;
+      transition: stroke 0.3s ease;
+      vector-effect: non-scaling-stroke;
+    }
+    .edge.highlight { stroke: var(--primary-color); stroke-width: 2; }
+
+    /* --- Nodes --- */
+    .node-group { cursor: pointer; transition: transform 0.15s ease-out; }
+    .node-group:hover { transform: translateY(-3px); }
+
+    .node {
+      rx: 10; /* Slightly more rounded */
+      ry: 10;
+      stroke-width: 1.5;
+      fill: white;
+      transition: fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease, stroke-width 0.2s ease; /* Added stroke-width transition */
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.05));
+      stroke: #e2e8f0;
+      vector-effect: non-scaling-stroke;
+    }
+    .node-state-done { stroke: #4ade80; }
+    .node-state-progress { stroke: #facc15; }
+    .node-state-lag { stroke: #f87171; }
+    .node-state-none { stroke: #94a3b8; }
+
+    .node-group:hover .node {
+      filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.08));
+      stroke: #94a3b8;
+    }
+    .node-group:hover .node-state-done { stroke: #4ade80; }
+    .node-group:hover .node-state-progress { stroke: #facc15; }
+    .node-group:hover .node-state-lag { stroke: #f87171; }
+
+    /* --- Selected Node Style --- */
+    .node-group.selected .node {
+      stroke: var(--primary-color); /* Use primary color for selected border */
+      stroke-width: 2.5px; /* Make border thicker */
+      filter: drop-shadow(0 6px 12px rgba(65, 105, 225, 0.2)); /* Add a subtle blue shadow */
+    }
+    /* Keep state color visible even when selected (optional, could override stroke completely) */
+    .node-group.selected .node-state-done { stroke: var(--primary-color); }
+    .node-group.selected .node-state-progress { stroke: var(--primary-color); }
+    .node-group.selected .node-state-lag { stroke: var(--primary-color); }
+    .node-group.selected .node-state-none { stroke: var(--primary-color); }
+    /* --- End Selected Node Style --- */
+
+
+    .node-header {
+      fill: url(#headerGradient);
+      stroke: none;
+      rx: 10; ry: 10; /* Match node rounding */
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .node-title {
+      font-size: 14px; /* Slightly larger title */
+      font-weight: 600;
+      fill: #1e293b;
+      pointer-events: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .node-bullet {
+      font-size: 12px; /* Slightly larger bullets */
+      fill: #475569;
+      pointer-events: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .status-icon {
+      /* Size set inline */
+    }
+    .status-icon.done { color: #22c55e; }
+    .status-icon.progress { color: #eab308; }
+    .status-icon.lag { color: #ef4444; }
+    .status-icon.none { color: #64748b; }
+
+    /* --- Table View --- */
+    .table-view { padding: 0; overflow-x: auto; }
+    .table-view table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .table-view th,
+    .table-view td { border: 1px solid #e5e7eb; padding: 12px 15px; text-align: left; vertical-align: middle; }
+    .table-view th { background-color: #f9fafb; font-weight: 600; color: #374151; }
+    .table-view tbody tr { transition: background-color 0.15s ease; }
+    .table-view tbody tr:hover { background-color: #f3f4f6; cursor: pointer; }
+    .table-view td:first-child, .table-view th:first-child { text-align: center; width: 60px; }
+    .table-view .status-icon { font-size: 16px; }
+
+
+    /* --- Side Panel --- */
+    .side-panel {
+      position: absolute;
+      top: 0;
+      right: -380px; /* Start further off-screen */
+      width: 360px; /* Slightly wider panel */
+      height: 100%;
+      background: white;
+      border-left: 1px solid #e5e7eb;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.08);
+      transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10; /* Base z-index */
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .side-panel.open { right: 0; }
+
+    .side-panel-close-btn {
+      position: absolute;
+      top: 12px; /* Adjusted position */
+      right: 12px; /* Adjusted position */
+      background: none;
+      border: none;
+      color: #9ca3af; /* Ensure color is visible */
+      font-size: 1.5rem; /* Slightly larger icon */
+      cursor: pointer;
+      padding: 8px; /* Larger click area */
+      line-height: 1;
+      border-radius: 50%;
+      transition: color 0.2s ease, background-color 0.2s ease, transform 0.1s ease;
+      z-index: 15; /* Increased z-index to ensure it's above header */
+      display: flex; /* Ensure icon inside is displayed */
+      align-items: center;
+      justify-content: center;
+    }
+    .side-panel-close-btn:hover {
+      color: #374151; /* Darker on hover */
+      background-color: #f3f4f6; /* Subtle background */
+      transform: scale(1.1); /* Slight scale on hover */
+    }
+    .side-panel-close-btn:active {
+      transform: scale(1.0); /* Reset scale on click */
+    }
+    /* Ensure the icon itself is visible */
+    .side-panel-close-btn svg {
+      display: block;
+    }
+
+
+    .side-panel-header {
+      display: flex;
+      align-items: center;
+      gap: 15px; /* Increased gap */
+      padding: 20px 30px; /* Adjusted padding */
+      border-bottom: 1px solid #e5e7eb;
+      background-color: #f9fafb; /* Light header background */
+      flex-shrink: 0; /* Prevent shrinking */
+      min-height: 70px; /* Ensure minimum header height */
+      box-sizing: border-box;
+      position: relative; /* Needed for z-index context if header elements overlap */
+      z-index: 12; /* Below close button but above content */
+    }
+    .side-panel-header .status-icon {
+      font-size: 1.8rem; /* Larger status icon */
+      flex-shrink: 0;
+    }
+    .side-panel h3 {
+      font-size: 1.3rem; /* Adjusted title size */
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+      line-height: 1.3;
+      padding-right: 40px; /* Add padding to prevent overlap with close button */
+    }
+
+    /* Wrapper for scrollable content */
+    .side-panel-content {
+      flex-grow: 1; /* Take remaining space */
+      overflow-y: auto; /* Enable scrolling */
+      padding: 0; /* Remove padding, handle in sections */
+      position: relative; /* Needed for z-index context */
+      z-index: 11; /* Below header */
+    }
+
+    /* --- Custom Scrollbar --- */
+    .side-panel-content::-webkit-scrollbar {
+      width: 8px; /* Width of the scrollbar */
+    }
+    .side-panel-content::-webkit-scrollbar-track {
+      background: #f1f1f1; /* Track color */
+      border-radius: 4px;
+    }
+    .side-panel-content::-webkit-scrollbar-thumb {
+      background: #c1c1c1; /* Thumb color */
+      border-radius: 4px;
+    }
+    .side-panel-content::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8; /* Thumb color on hover */
+    }
+    /* For Firefox */
+    .side-panel-content {
+      scrollbar-width: thin; /* "auto" or "thin" */
+      scrollbar-color: #c1c1c1 #f1f1f1; /* thumb track */
+    }
+    /* --- End Custom Scrollbar --- */
+
+
+    .side-panel-section {
+      padding: 25px 30px; /* Increased padding */
+      border-bottom: 1px solid #f3f4f6; /* Lighter border between sections */
+    }
+    .side-panel-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .side-panel-details h4,
+    .side-panel h4 { /* Style section titles */
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 15px; /* Increased space */
+      color: #374151;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #e5e7eb; /* Underline title */
+      padding-bottom: 8px;
+    }
+
+    .side-panel-details .detail-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; /* Vertically align */
+      margin-bottom: 14px; /* Increased space */
+      font-size: 0.9rem;
+    }
+    .detail-label {
+      color: #6b7280;
+      font-weight: 500;
+      margin-right: 15px; /* Space between label and value */
+    }
+    .detail-value {
+      color: var(--text-primary);
+      font-weight: 500;
+      text-align: right; /* Align value to the right */
+    }
+
+    .subtopic-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .subtopic-list li {
+      padding: 10px 0 10px 25px; /* Increased padding */
+      position: relative;
+      line-height: 1.5;
+      color: #4b5563;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #f8f9fa; /* Very light separator */
+    }
+    .subtopic-list li:last-child {
+      border-bottom: none;
+    }
+    .subtopic-list li::before {
+      content: '✓'; /* Checkmark instead of bullet */
+      position: absolute;
+      left: 5px;
+      top: 10px; /* Adjust vertical position */
+      color: var(--primary-color); /* Use primary color */
+      font-weight: 600;
+      font-size: 0.9em;
+    }
+
+    /* Footer for actions */
+    .side-panel-footer {
+      padding: 20px 30px;
+      background-color: #f9fafb; /* Match header background */
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-shrink: 0; /* Prevent shrinking */
+      position: relative; /* Needed for z-index context */
+      z-index: 12; /* Above content */
+    }
+
+    .action-button {
+      padding: 12px 18px; /* Larger buttons */
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      text-align: center;
+      transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px; /* Increased gap */
+      font-size: 0.95rem; /* Slightly larger font */
+    }
+     .action-button:active {
+        transform: scale(0.98); /* Add active state */
+    }
+    .action-button svg {
+      font-size: 1.1em; /* Slightly larger icon */
+    }
+
+    .action-button.primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    .action-button.primary:hover {
+      opacity: 0.85;
+    }
+
+    .action-button.secondary {
+      background-color: #ffffff; /* White background */
+      color: #374151;
+      border: 1px solid #d1d5db; /* Visible border */
+    }
+    .action-button.secondary:hover {
+      background-color: #f3f4f6; /* Light gray on hover */
+      border-color: #adb5bd;
+    }

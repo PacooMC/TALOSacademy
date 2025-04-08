@@ -1,0 +1,57 @@
+.yes-no-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%; /* Take full width within its container */
+}
+
+.yes-no-selector label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.yes-no-selector .options {
+  display: flex;
+  gap: 10px;
+}
+
+.yes-no-selector .option-btn {
+  flex: 1; /* Make buttons share space */
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: 1px solid var(--card-border, #e5e7eb);
+  background-color: var(--card-bg, #ffffff);
+  color: var(--text-secondary, #6b7280);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.yes-no-selector .option-btn:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.yes-no-selector .option-btn.selected {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: var(--light-blue, #eef2ff);
+  box-shadow: 0 1px 3px rgba(65, 105, 225, 0.1);
+}
+
+/* Optional: Specific colors for Yes/No when selected */
+/*
+.yes-no-selector .option-btn.selected.yes {
+  border-color: #22c55e;
+  color: #166534;
+  background-color: #dcfce7;
+}
+
+.yes-no-selector .option-btn.selected.no {
+   border-color: #ef4444;
+   color: #991b1b;
+   background-color: #fee2e2;
+}
+*/

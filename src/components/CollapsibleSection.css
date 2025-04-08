@@ -1,0 +1,93 @@
+.collapsible-section {
+  /* Borders/background handled by parent */
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  background-color: #f9fafb;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  cursor: pointer;
+  transition: background-color 0.2s ease; /* Keep hover transition */
+  border-bottom: 1px solid transparent; /* Keep border logic */
+}
+.collapsible-section.open .section-header {
+   border-bottom-color: var(--card-border, #e5e7eb);
+}
+
+.section-header:hover {
+  background-color: #f0f4f8;
+}
+
+.chevron-icon {
+  color: #6b7280;
+  font-size: 0.9em;
+  transition: transform 0.2s ease-in-out; /* Keep chevron rotation */
+}
+/* Rotate chevron when open */
+.collapsible-section.open .section-header .chevron-icon {
+   transform: rotate(90deg);
+}
+
+.section-title {
+  flex-grow: 1;
+}
+
+/* --- New Display Logic --- */
+.section-content-wrapper {
+  display: none; /* Hidden by default */
+  padding: 15px 20px 20px 42px; /* Apply padding when shown */
+  background-color: #ffffff;
+  /* Remove max-height and transition */
+  overflow: visible; /* Allow content to determine height */
+}
+.collapsible-section.open .section-content-wrapper {
+  display: block; /* Show when section is open */
+}
+
+.section-content {
+  font-size: 0.95rem;
+  color: var(--text-secondary, #6b7280);
+  line-height: 1.65;
+  /* Remove opacity transition */
+  /* Remove height/max-height constraints */
+  height: auto;
+  max-height: none;
+  overflow: visible; /* Ensure content isn't clipped */
+}
+
+.section-content p {
+  margin-bottom: 1.2em;
+}
+.section-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Ensure math formulas inside collapsible sections display correctly */
+.section-content .math-formula {
+  margin: 1em 0;
+  display: block;
+  background-color: var(--formula-bg);
+  border: 1px solid var(--formula-border);
+  border-radius: 6px;
+  padding: 15px 20px;
+  color: var(--formula-text);
+  font-family: var(--font-family-mono);
+  font-size: 0.95em;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+.section-content .math-formula code {
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  color: inherit;
+}

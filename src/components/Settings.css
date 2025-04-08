@@ -1,0 +1,201 @@
+/* === Settings Page Styles === */
+:root {
+  /* Re-use variables or define new ones */
+  --settings-bg: #f8f9fa;
+  --settings-card-bg: #ffffff;
+  --settings-border: #dee2e6;
+  --settings-text-primary: #212529;
+  --settings-text-secondary: #6c757d;
+  --settings-placeholder-text: #9ca3af;
+  --settings-button-primary: var(--primary-color, #4169e1);
+  --settings-button-danger: #dc3545;
+  --settings-list-hover: #f1f3f5;
+}
+
+.settings-container {
+  flex: 1;
+  padding: 30px 40px;
+  background-color: var(--settings-bg);
+  overflow-y: auto;
+}
+
+.settings-container h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--settings-text-primary);
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--settings-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.settings-container h1 svg {
+  color: var(--settings-text-secondary);
+}
+
+.settings-section {
+  background-color: var(--settings-card-bg);
+  border: 1px solid var(--settings-border);
+  border-radius: 8px;
+  padding: 25px 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.settings-section h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--settings-text-primary);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.placeholder-text {
+  color: var(--settings-placeholder-text);
+  font-style: italic;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Enrolled Subjects List */
+.enrolled-subjects-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.enrolled-subjects-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px; /* Increased padding */
+  border-bottom: 1px solid var(--settings-border);
+  transition: background-color 0.15s ease;
+}
+.enrolled-subjects-list li:last-child {
+  border-bottom: none;
+}
+.enrolled-subjects-list li:hover {
+  background-color: var(--settings-list-hover);
+}
+
+.subject-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.subject-name {
+  font-weight: 500;
+  color: var(--settings-text-primary);
+  font-size: 1rem;
+}
+
+.subject-details {
+  font-size: 0.85rem;
+  color: var(--settings-text-secondary);
+}
+
+.remove-subject-btn {
+  background: none;
+  border: none;
+  color: var(--settings-text-secondary);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.remove-subject-btn:hover {
+  color: var(--settings-button-danger);
+  background-color: #f8d7da; /* Light red */
+}
+
+.limit-info {
+  font-size: 0.9rem;
+  color: var(--settings-text-secondary);
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Add New Subjects Section */
+.add-subject-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--settings-border);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-grow: 1; /* Allow filters to grow */
+  min-width: 200px; /* Minimum width for filters */
+}
+.filter-group.search-filter {
+  background-color: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--settings-border);
+}
+.filter-group.search-filter svg {
+  color: var(--settings-placeholder-text);
+}
+.filter-group input[type="text"] {
+  border: none;
+  background: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 0.95rem;
+}
+.filter-group select {
+  flex-grow: 1;
+  padding: 9px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--settings-border);
+  font-size: 0.95rem;
+  background: white;
+  color: var(--settings-text-primary);
+  cursor: pointer;
+}
+
+.available-subjects-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px; /* Limit height */
+  overflow-y: auto;
+}
+
+.available-subjects-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #f1f3f5; /* Lighter border */
+}
+.available-subjects-list li:last-child {
+  border-bottom: none;
+}
+
+.add-subject-btn {
+  padding: 6px 12px;
+  background-color: var(--settings-button-primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: opacity 0.2s ease;
+}
+.add-subject-btn:hover {
+  opacity: 0.85;
+}
